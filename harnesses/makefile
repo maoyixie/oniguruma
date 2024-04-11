@@ -13,7 +13,7 @@ TARGETS = fuzzer-encode fuzzer-syntax fuzzer-utf16-be fuzzer-utf16-le \
           fuzzer-regset \
           read-encode read-syntax read-utf16-be read-utf16-le read-regset
 
-OTHER_TARGETS = libfuzzer-onig libfuzzer-onig-full fuzzer-deluxe read-deluxe
+OTHER_TARGETS = libfuzzer-onig libfuzzer-onig-full fuzzer-deluxe read-deluxe libfuzzer-onig2
 
 
 #default: $(TARGETS)
@@ -60,6 +60,10 @@ libfuzzer-onig: libfuzzer-onig.cpp $(ONIG_LIB)
 
 libfuzzer-onig-full: libfuzzer-onig.cpp $(ONIG_LIB)
 	clang++ -DFULL_TEST $(CFLAGS) $< $(LIBS) -o $@
+
+#add
+libfuzzer-onig2: libfuzzer-onig2.c $(ONIG_LIB)
+	clang $(CFLAGS) $< $(LIBS) -o $@
 
 
 $(ONIG_LIB):
